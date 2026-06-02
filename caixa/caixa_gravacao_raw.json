@@ -1,0 +1,207 @@
+[
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980036459,
+    "tag": "SPAN",
+    "text": "Saldo e Extratos",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Saldo e Extratos\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980039634,
+    "tag": "A",
+    "text": "Extrato por Período",
+    "type": "click",
+    "value": "//a[normalize-space(.)=\"Extrato por Período\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980041163,
+    "tag": "LABEL",
+    "text": "OUTRO MÊS:",
+    "type": "click",
+    "value": "//label[normalize-space(.)=\"OUTRO MÊS:\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980041165,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "rdoTipoExtratoOutro"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "O",
+    "t": 1779980042355,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "rdoTipoExtratoOutro"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980042467,
+    "tag": "SELECT",
+    "text": "Escolha o mês Abril/2026 Março/2026 Fevereiro/2026 Janeiro/2026 Dezembro/2025 No",
+    "type": "click",
+    "value": "sltOutroMes"
+  },
+  {
+    "by": "id",
+    "fill": "1",
+    "t": 1779980044460,
+    "text": "Abril/2026",
+    "type": "select",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980044529,
+    "tag": "SELECT",
+    "text": "Escolha o mês Abril/2026 Março/2026 Fevereiro/2026 Janeiro/2026 Dezembro/2025 No",
+    "type": "click",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "1",
+    "t": 1779980048110,
+    "tag": "SELECT",
+    "type": "fill",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980048274,
+    "tag": "BUTTON",
+    "text": "Continuar",
+    "type": "click",
+    "value": "confirma"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980057643,
+    "tag": "SPAN",
+    "text": "Imprimir",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Imprimir\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980074490,
+    "tag": "SPAN",
+    "text": "Retornar",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Retornar\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980081538,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "rdoTipoExtratoOutro"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "O",
+    "t": 1779980082539,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "rdoTipoExtratoOutro"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980082682,
+    "tag": "SELECT",
+    "text": "Escolha o mês Abril/2026 Março/2026 Fevereiro/2026 Janeiro/2026 Dezembro/2025 No",
+    "type": "click",
+    "value": "sltOutroMes"
+  },
+  {
+    "by": "id",
+    "fill": "1",
+    "t": 1779980085220,
+    "text": "Abril/2026",
+    "type": "select",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980085221,
+    "tag": "SELECT",
+    "text": "Escolha o mês Abril/2026 Março/2026 Fevereiro/2026 Janeiro/2026 Dezembro/2025 No",
+    "type": "click",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "1",
+    "t": 1779980086949,
+    "tag": "SELECT",
+    "type": "fill",
+    "value": "sltOutroMes"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980087050,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "rdoFormatoExtratoArquivo"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "",
+    "t": 1779980087891,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "rdoFormatoExtratoArquivo"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779980087994,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "rdoFormatoArquivoOfx"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "ofx",
+    "t": 1779980091784,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "rdoFormatoArquivoOfx"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779980092010,
+    "tag": "SPAN",
+    "text": "Continuar",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Continuar\"]"
+  }
+]

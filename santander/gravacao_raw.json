@@ -1,0 +1,209 @@
+[
+  {
+    "aviso": "ID_DINAMICO",
+    "by": "id",
+    "t": 1779906814036,
+    "tag": "IMG",
+    "text": "",
+    "type": "click",
+    "value": "j_id_1h"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906815316,
+    "tag": "SPAN",
+    "text": "Conta Corrente",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Conta Corrente\"]"
+  },
+  {
+    "aviso": null,
+    "by": "css",
+    "t": 1779906830799,
+    "tag": "SPAN",
+    "text": "",
+    "type": "click",
+    "value": "span.dss-icon-close-1px"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906832764,
+    "tag": "LABEL",
+    "text": "Período personalizado",
+    "type": "click",
+    "value": "//label[normalize-space(.)=\"Período personalizado\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779906832788,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "twjnn-154cb194c9-1775b-1ce28-18879-1180d157d413cffstart"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "01/04/2026",
+    "t": 1779906838983,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "twjnn-154cb194c9-1775b-1ce28-18879-1180d157d413cffstart"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "30/04/2026",
+    "t": 1779906857270,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "twjnn-154cb194c9-1775b-1ce28-18879-1180d157d413cffend"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906857395,
+    "tag": "A",
+    "text": "Exportar",
+    "type": "click",
+    "value": "//a[normalize-space(.)=\"Exportar\"]"
+  },
+  {
+    "aviso": null,
+    "by": "css",
+    "t": 1779906858995,
+    "tag": "LABEL",
+    "text": "",
+    "type": "click",
+    "value": "label.form-check-label"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779906859000,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "pdf"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906860307,
+    "tag": "P",
+    "text": "Baixar extrato",
+    "type": "click",
+    "value": "//p[normalize-space(.)=\"Baixar extrato\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906870845,
+    "tag": "A",
+    "text": "Exportar",
+    "type": "click",
+    "value": "//a[normalize-space(.)=\"Exportar\"]"
+  },
+  {
+    "aviso": null,
+    "by": "css",
+    "t": 1779906872259,
+    "tag": "LABEL",
+    "text": "",
+    "type": "click",
+    "value": "label.form-check-label"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779906872280,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "ofx"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906873740,
+    "tag": "LABEL",
+    "text": "Money 2000 ou superior",
+    "type": "click",
+    "value": "//label[normalize-space(.)=\"Money 2000 ou superior\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779906873748,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "itdkn-19c5c13ab8-1a6f8-1e0f9-1ab81-11bbe1b08e1da63"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "2",
+    "t": 1779906875724,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "itdkn-19c5c13ab8-1a6f8-1e0f9-1ab81-11bbe1b08e1da63"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906875963,
+    "tag": "P",
+    "text": "Baixar extrato",
+    "type": "click",
+    "value": "//p[normalize-space(.)=\"Baixar extrato\"]"
+  },
+  {
+    "aviso": "ID_DINAMICO",
+    "by": "id",
+    "t": 1779906884514,
+    "tag": "IMG",
+    "text": "",
+    "type": "click",
+    "value": "j_id_p"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906885499,
+    "tag": "SPAN",
+    "text": "Investimentos",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Investimentos\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906897115,
+    "tag": "DIV",
+    "text": "Maio/2026",
+    "type": "click",
+    "value": "//div[normalize-space(.)=\"Maio/2026\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906900427,
+    "tag": "SPAN",
+    "text": "Abril/2026",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Abril/2026\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779906908747,
+    "tag": "A",
+    "text": "Salvar em PDF",
+    "type": "click",
+    "value": "//a[normalize-space(.)=\"Salvar em PDF\"]"
+  }
+]

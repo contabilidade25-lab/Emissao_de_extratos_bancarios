@@ -1,0 +1,128 @@
+[
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986635693,
+    "tag": "SPAN",
+    "text": "Permitir todos",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"Permitir todos\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986640555,
+    "tag": "A",
+    "text": "Acessar minha conta",
+    "type": "click",
+    "value": "//a[normalize-space(.)=\"Acessar minha conta\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "",
+    "t": 1779986654094,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "cnpj"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779986682082,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "cnpj"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "",
+    "t": 1779986696416,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "j_username"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779986702667,
+    "tag": "INPUT",
+    "text": "",
+    "type": "click",
+    "value": "j_username"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "fill": "kasseus2025",
+    "t": 1779986714173,
+    "tag": "INPUT",
+    "type": "fill",
+    "value": "j_username"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986714322,
+    "tag": "SPAN",
+    "text": "6 ou 3",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"6 ou 3\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986719313,
+    "tag": "SPAN",
+    "text": "2 ou 8",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"2 ou 8\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986724121,
+    "tag": "SPAN",
+    "text": "7 ou 5",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"7 ou 5\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986733689,
+    "tag": "SPAN",
+    "text": "4 ou 1",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"4 ou 1\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986738937,
+    "tag": "SPAN",
+    "text": "2 ou 8",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"2 ou 8\"]"
+  },
+  {
+    "aviso": null,
+    "by": "xpath",
+    "t": 1779986740073,
+    "tag": "SPAN",
+    "text": "9 ou 0",
+    "type": "click",
+    "value": "//span[normalize-space(.)=\"9 ou 0\"]"
+  },
+  {
+    "aviso": null,
+    "by": "id",
+    "t": 1779986756665,
+    "tag": "DIV",
+    "text": "Acessar",
+    "type": "click",
+    "value": "submeter"
+  }
+]

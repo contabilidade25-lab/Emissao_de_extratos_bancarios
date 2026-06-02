@@ -1,0 +1,25 @@
+# Credenciais e segredos
+.env
+credentials.json
+token.json
+
+# Pasta Itaú (em desenvolvimento)
+itau/
+
+# Builds
+Executavel_bancos/
+build_tmp/
+dist/
+*.spec
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Logs e temporários
+*.log
+log_*/
+*.tmp
