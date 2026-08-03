@@ -39,8 +39,11 @@ login/extrato existente.
   funciona para qualquer um desses três — não é necessário repetir o consentimento
   OAuth por pasta.
 - **`Enviar pro drive/token_drive.json` já existe e já está autenticado**
-  para o escopo Drive com esse client. Pode ser copiado diretamente, sem
-  novo fluxo interativo de login.
+  para o escopo Drive com esse client, como a conta
+  `contabilidade36@akartos.com.br` — a mesma que já tem acesso à pasta de
+  destino no Drive (confirmado: a ferramenta manual já funciona hoje com
+  esse token). Pode ser copiado diretamente, sem novo fluxo interativo de
+  login.
 - **Defaults hardcoded já são o padrão do projeto** para configuração que não
   muda por ambiente: `sheets_santander.py`/`sheets_caixa.py`/`sheets_sicredi.py`
   já usam `os.getenv("SPREADSHEET_ID", "<id fixo>")`. `caixa/` e `santander/`
