@@ -24,6 +24,7 @@ from notificacao import notificar_resumo
 from bradesco_login   import criar_driver, BradescoSession
 from bradesco_extrato import BradescoExtrato
 from sheets_reader    import ler_empresas
+from drive_upload     import criar_service, enviar_empresa, DRIVE_FOLDER_ID
 
 _DIR = Path(sys.executable).parent if getattr(sys, 'frozen', False) else Path(__file__).parent
 load_dotenv(_DIR / ".env")
@@ -158,6 +159,12 @@ def main():
     resultados = {"ok": [], "erro_login": [], "erro_extrato": []}
 
     try:
+        drive_service = criar_service()
+    except Exception as e:
+        print(f"  ⚠ Não foi possível conectar ao Google Drive ({e}) — uploads serão pulados.")
+        drive_service = None
+
+    try:
         sessao  = BradescoSession(driver)
         extrato = BradescoExtrato(driver, BANCO_DIR)
 
@@ -203,6 +210,11 @@ def main():
                 resultados["erro_extrato"].append(empresa.nome)
             else:
                 resultados["ok"].append(empresa.nome)
+                if drive_service is not None:
+                    try:
+                        enviar_empresa(drive_service, BANCO_DIR.name, empresa_dir, DRIVE_FOLDER_ID)
+                    except Exception as e:
+                        print(f"  ⚠ Falha ao enviar '{empresa.nome}' pro Drive: {e}")
 
             sessao.logout()
 
