@@ -24,6 +24,7 @@ from notificacao import notificar_resumo
 from sicredi_login          import criar_driver, SicrediSession
 from sicredi_extrato_gravado import extrato_sicredi, _mes_anterior
 from sheets_sicredi          import ler_empresas_sicredi
+from drive_upload            import criar_service, enviar_empresa, DRIVE_FOLDER_ID
 
 _DIR     = Path(sys.executable).parent if getattr(sys, 'frozen', False) else Path(__file__).parent
 load_dotenv(_DIR / ".env")
@@ -145,6 +146,12 @@ def main():
     resultados = {"ok": [], "erro_login": [], "erro_extrato": []}
 
     try:
+        drive_service = criar_service()
+    except Exception as e:
+        print(f"  ⚠ Não foi possível conectar ao Google Drive ({e}) — uploads serão pulados.")
+        drive_service = None
+
+    try:
         sessao = SicrediSession(driver)
 
         print("[3/3] Processando empresas...\n")
@@ -211,6 +218,11 @@ def main():
             else:
                 resultados["ok"].append(empresa.nome)
                 print(f"  → Extratos em: {empresa_dir}")
+                if drive_service is not None:
+                    try:
+                        enviar_empresa(drive_service, BANCO_DIR.name, empresa_dir, DRIVE_FOLDER_ID)
+                    except Exception as e:
+                        print(f"  ⚠ Falha ao enviar '{empresa.nome}' pro Drive: {e}")
 
             sessao.logout()
 
