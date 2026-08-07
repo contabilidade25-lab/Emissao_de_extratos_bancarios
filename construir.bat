@@ -4,6 +4,7 @@ chcp 65001 >nul
 set "ROOT=%~dp0"
 set "CRED=%ROOT%bradesco\credentials.json"
 set "TOK=%ROOT%bradesco\token.json"
+set "TOKD=%ROOT%bradesco\token_drive.json"
 
 echo ============================================================
 echo  CONSTRUINDO EXECUTAVEIS DOS BANCOS
@@ -120,6 +121,13 @@ if exist "%SRC%\token.json" (
     copy /Y "%SRC%\token.json" "%DEST%\token.json" >nul
 ) else if exist "%TOK%" (
     copy /Y "%TOK%" "%DEST%\token.json" >nul
+)
+
+REM token_drive.json
+if exist "%SRC%\token_drive.json" (
+    copy /Y "%SRC%\token_drive.json" "%DEST%\token_drive.json" >nul
+) else if exist "%TOKD%" (
+    copy /Y "%TOKD%" "%DEST%\token_drive.json" >nul
 )
 
 echo    Config restaurada em Executavel_bancos\%BANCO%\
