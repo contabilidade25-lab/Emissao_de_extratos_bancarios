@@ -41,12 +41,17 @@ def _autenticar(base_dir: Path) -> Credentials:
 _EXTRA = {"supportsAllDrives": True, "includeItemsFromAllDrives": True}
 
 
+def _q(valor: str) -> str:
+    """Escapa aspas simples e barras invertidas pra uso seguro em query strings da API do Drive."""
+    return valor.replace("\\", "\\\\").replace("'", "\\'")
+
+
 def _pasta_id(service, nome: str, parent_id: str) -> str:
     chave = (nome, parent_id)
     if chave in _cache_pastas:
         return _cache_pastas[chave]
-    q = (f"name='{nome}' and mimeType='application/vnd.google-apps.folder'"
-         f" and '{parent_id}' in parents and trashed=false")
+    q = (f"name='{_q(nome)}' and mimeType='application/vnd.google-apps.folder'"
+         f" and '{_q(parent_id)}' in parents and trashed=false")
     res = service.files().list(q=q, fields="files(id)", **_EXTRA).execute()
     arquivos = res.get("files", [])
     if arquivos:
@@ -61,24 +66,30 @@ def _pasta_id(service, nome: str, parent_id: str) -> str:
     return fid
 
 
-def _arquivo_existente(service, nome: str, parent_id: str) -> str | None:
-    q = f"name='{nome}' and '{parent_id}' in parents and trashed=false"
-    res = service.files().list(q=q, fields="files(id)", **_EXTRA).execute()
+def _arquivo_existente(service, nome: str, parent_id: str) -> dict | None:
+    q = f"name='{_q(nome)}' and '{_q(parent_id)}' in parents and trashed=false"
+    res = service.files().list(q=q, fields="files(id,size)", **_EXTRA).execute()
     arqs = res.get("files", [])
-    return arqs[0]["id"] if arqs else None
+    return arqs[0] if arqs else None
 
 
 def _upload(service, caminho: Path, parent_id: str):
     nome = caminho.name
     ext = caminho.suffix.lower()
     mime = "application/pdf" if ext == ".pdf" else "application/octet-stream"
-    media = MediaFileUpload(str(caminho), mimetype=mime, resumable=False)
     existente = _arquivo_existente(service, nome, parent_id)
     if existente:
-        service.files().update(fileId=existente, media_body=media,
+        tamanho_local = caminho.stat().st_size
+        tamanho_drive = int(existente.get("size", -1))
+        if tamanho_local == tamanho_drive:
+            print(f"      = {nome} (sem mudanças)")
+            return
+        media = MediaFileUpload(str(caminho), mimetype=mime, resumable=False)
+        service.files().update(fileId=existente["id"], media_body=media,
                                supportsAllDrives=True).execute()
         print(f"      ↺ {nome}")
     else:
+        media = MediaFileUpload(str(caminho), mimetype=mime, resumable=False)
         meta = {"name": nome, "parents": [parent_id]}
         service.files().create(body=meta, media_body=media, fields="id",
                                supportsAllDrives=True).execute()

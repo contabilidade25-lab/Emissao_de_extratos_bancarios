@@ -1,0 +1,115 @@
+import sys
+import time
+from pathlib import Path
+
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+
+SCOPES = ["https://www.googleapis.com/auth/drive"]
+
+_cache_pastas: dict[tuple[str, str], str] = {}
+
+
+def _autenticar(base_dir: Path) -> Credentials:
+    token_path  = base_dir / "token_drive.json"
+    creds_path  = base_dir / "credentials.json"
+    creds = None
+    if token_path.exists():
+        creds = Credentials.from_authorized_user_file(str(token_path), SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), SCOPES)
+            creds = flow.run_local_server(port=0)
+        token_path.write_text(creds.to_json())
+    return creds
+
+
+_EXTRA = {"supportsAllDrives": True, "includeItemsFromAllDrives": True}
+
+
+def _q(valor: str) -> str:
+    """Escapa aspas simples e barras invertidas pra uso seguro em query strings da API do Drive."""
+    return valor.replace("\\", "\\\\").replace("'", "\\'")
+
+
+def _pasta_id(service, nome: str, parent_id: str) -> str:
+    chave = (nome, parent_id)
+    if chave in _cache_pastas:
+        return _cache_pastas[chave]
+    q = (f"name='{_q(nome)}' and mimeType='application/vnd.google-apps.folder'"
+         f" and '{_q(parent_id)}' in parents and trashed=false")
+    res = service.files().list(q=q, fields="files(id)", **_EXTRA).execute()
+    arquivos = res.get("files", [])
+    if arquivos:
+        fid = arquivos[0]["id"]
+    else:
+        meta = {"name": nome, "mimeType": "application/vnd.google-apps.folder",
+                "parents": [parent_id]}
+        fid = service.files().create(body=meta, fields="id",
+                                     supportsAllDrives=True).execute()["id"]
+        print(f"    + pasta: {nome}")
+    _cache_pastas[chave] = fid
+    return fid
+
+
+def _arquivo_existente(service, nome: str, parent_id: str) -> dict | None:
+    q = f"name='{_q(nome)}' and '{_q(parent_id)}' in parents and trashed=false"
+    res = service.files().list(q=q, fields="files(id,size)", **_EXTRA).execute()
+    arqs = res.get("files", [])
+    return arqs[0] if arqs else None
+
+
+def _upload(service, caminho: Path, parent_id: str):
+    nome = caminho.name
+    ext = caminho.suffix.lower()
+    mime = "application/pdf" if ext == ".pdf" else "application/octet-stream"
+    existente = _arquivo_existente(service, nome, parent_id)
+    if existente:
+        tamanho_local = caminho.stat().st_size
+        tamanho_drive = int(existente.get("size", -1))
+        if tamanho_local == tamanho_drive:
+            print(f"      = {nome} (sem mudanças)")
+            return
+        media = MediaFileUpload(str(caminho), mimetype=mime, resumable=False)
+        service.files().update(fileId=existente["id"], media_body=media,
+                               supportsAllDrives=True).execute()
+        print(f"      ↺ {nome}")
+    else:
+        media = MediaFileUpload(str(caminho), mimetype=mime, resumable=False)
+        meta = {"name": nome, "parents": [parent_id]}
+        service.files().create(body=meta, media_body=media, fields="id",
+                               supportsAllDrives=True).execute()
+        print(f"      + {nome}")
+
+
+def sincronizar_banco(service, pasta_banco: Path, drive_root_id: str):
+    banco_id = _pasta_id(service, pasta_banco.name, drive_root_id)
+
+    for empresa_dir in sorted(pasta_banco.iterdir()):
+        if not empresa_dir.is_dir():
+            continue
+        empresa_id = _pasta_id(service, empresa_dir.name, banco_id)
+        print(f"  [{empresa_dir.name}]")
+        _sincronizar_dir(service, empresa_dir, empresa_id)
+
+
+def _sincronizar_dir(service, local: Path, drive_parent_id: str):
+    for item in sorted(local.iterdir()):
+        if item.is_dir():
+            sub_id = _pasta_id(service, item.name, drive_parent_id)
+            _sincronizar_dir(service, item, sub_id)
+        elif item.is_file() and item.suffix.lower() in (".pdf", ".ofx", ".txt"):
+            try:
+                _upload(service, item, drive_parent_id)
+            except Exception as e:
+                print(f"      ✗ {item.name}: {e}")
+
+
+def criar_service(base_dir: Path):
+    creds = _autenticar(base_dir)
+    return build("drive", "v3", credentials=creds)

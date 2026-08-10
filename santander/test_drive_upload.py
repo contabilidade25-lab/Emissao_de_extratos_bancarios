@@ -46,3 +46,29 @@ def test_enviar_empresa_cria_pasta_banco_depois_pasta_empresa_e_sincroniza(tmp_p
         ("pasta", "Empresa Teste", "id-SANTANDER"),
         ("sync", empresa_dir, "id-Empresa Teste"),
     ]
+
+
+def test_q_escapa_aspas_simples_e_barra_invertida():
+    assert drive_upload._q("D'Avila") == "D\\'Avila"
+    assert drive_upload._q("C:\\pasta") == "C:\\\\pasta"
+
+
+def test_upload_pula_arquivo_com_mesmo_tamanho(tmp_path, monkeypatch):
+    arquivo = tmp_path / "extrato.pdf"
+    arquivo.write_bytes(b"conteudo de teste")
+
+    chamadas = []
+
+    def fake_arquivo_existente(service, nome, parent_id):
+        return {"id": "id-existente", "size": str(arquivo.stat().st_size)}
+
+    def fake_media_upload(*args, **kwargs):
+        chamadas.append("upload_chamado")
+        raise AssertionError("não deveria fazer upload de arquivo sem mudanças")
+
+    monkeypatch.setattr(drive_upload, "_arquivo_existente", fake_arquivo_existente)
+    monkeypatch.setattr(drive_upload, "MediaFileUpload", fake_media_upload)
+
+    drive_upload._upload(service=object(), caminho=arquivo, parent_id="parent-id")
+
+    assert chamadas == []
