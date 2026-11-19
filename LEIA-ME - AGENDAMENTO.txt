@@ -1,0 +1,53 @@
+ROBÔS DE EXTRATOS — EXECUÇÃO AUTOMÁTICA TODO MÊS
+=================================================
+
+COMO FUNCIONA
+- Todo dia, às 13:00, o Windows confere se os robôs já rodaram naquele mês.
+- Se ainda não rodaram, roda os 5 (Santander, Bradesco, Caixa, Itaú, Sicredi), um por vez,
+  com todas as empresas. Cada robô abre na sua janela, e a janela fica aberta no fim com o relatório.
+- Na prática: roda no dia 1º às 13:00. Se no dia 1º a máquina estiver desligada (feriado, fim de
+  semana), roda no próximo dia em que ela estiver ligada às 13:00.
+- Se a máquina for desligada no meio, no dia seguinte (13:00) roda só os robôs que faltaram.
+- O que não deu certo fica anotado como pendência no "Relatório de envios de extratos" de cada
+  empresa, no BPO. Essas empresas devem ser rodadas de novo à mão (abrir o robô e escolher a opção 2).
+- Depois dos 5 robôs, sai o "Relatório geral de envios" do mês (por banco: empresas enviadas e
+  pendentes com o motivo). Ele fica no Drive em 6-BPO / RELATÓRIOS GERAIS DE ENVIOS e vai por e-mail,
+  da conta contabilidade36, para kasseus, contabilidade34 e contabilidade25.
+  Para mudar os destinatários: criar nesta pasta o arquivo "emails_relatorio.txt" com um e-mail por linha.
+  O envio usa a autorização "token_gmail.json" que fica na pasta santander.
+- Histórico das execuções: arquivo "execucao_mensal_log.txt" nesta pasta.
+- Arquivos desta pasta usados pelo agendamento: executar_mensal.ps1 e rodar_robo.bat (não apagar).
+- Se o Itaú aparecer com "o Guardião Itaú não respondeu": fechar o robô e o Chrome e rodar o Itaú de novo;
+  se continuar, reiniciar o computador. (O Guardião não permite ser reiniciado pelo robô.)
+
+O QUE A MÁQUINA PRECISA TER (uma vez só)
+1. Esta pasta completa, copiada do Drive "ROBÔ DE EMISSÃO DOS EXTRATOS / EXECUTÁVEL BANCOS /
+   Executavel_bancos", com as 5 pastas (santander, bradesco, caixa, itau, sicredi) e os arquivos
+   que estão dentro delas (inclusive .env, credentials.json, token.json e token_drive.json).
+2. Google Chrome instalado e atualizado.
+3. Guardião Itaú 30 horas instalado (https://www.itau.com.br/seguranca/guardiao/) — sem ele o
+   Itaú não entra. Precisa de administrador.
+4. Caminhos longos do Windows liberados: dar dois cliques em "habilitar_caminhos_longos.reg",
+   confirmar e reiniciar o computador. Precisa de administrador. (Sem isso, alguns investimentos
+   do Bradesco com nome de empresa muito comprido não são salvos.)
+5. Internet de preferência por cabo (no Wi-Fi o Santander já bloqueou o acesso por "Access Denied").
+6. Agendamento: com o usuário que vai ficar conectado na máquina, dar dois cliques em
+   "instalar_agendamento.bat". Não precisa de administrador.
+7. E-mail do relatório geral: dar dois cliques em "autorizar_email.bat". Vai abrir o navegador: entrar com
+   contabilidade36@akartos.com.br e clicar em Permitir. No fim chega um e-mail de teste na própria
+   contabilidade36. Se aparecer aviso de app bloqueado / Gmail API desativada, falar com o
+   administrador do Google da Akartos (precisa liberar o envio de e-mail no projeto dos robôs).
+
+NO DIA A DIA
+- A máquina precisa estar ligada e com o usuário conectado às 13:00 (pode estar com a tela
+  bloqueada, mas não desligada, suspensa ou na tela de entrar no Windows).
+- Configurar a energia para o computador não suspender sozinho durante o expediente.
+- Quando os robôs forem atualizados no Drive, copiar a versão nova dos .exe para esta pasta.
+
+TESTAR SEM ESPERAR O DIA 1º
+- Abrir o PowerShell nesta pasta e rodar:
+  powershell -ExecutionPolicy Bypass -File executar_mensal.ps1 -Agora
+  (roda os 5 robôs agora, com todas as empresas)
+
+DESFAZER
+- Agendador de Tarefas do Windows > "Robos extratos - mensal" > Excluir.

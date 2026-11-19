@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+; Permite caminhos de arquivo com mais de 260 caracteres (necessario para alguns extratos do Bradesco).
+; Dar dois cliques, confirmar como administrador e reiniciar o computador.
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+"LongPathsEnabled"=dword:00000001
